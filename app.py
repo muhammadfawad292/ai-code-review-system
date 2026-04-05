@@ -257,9 +257,9 @@ Now review this code:
 # ─────────────────────────────────────────────
 #  HELPER: configure Gemini and get client
 # ─────────────────────────────────────────────
-def get_gemini_client(api_key: str):
-    """Configure the Gemini SDK and return a GenerativeModel instance."""
-    genai.configure(api_key=api_key)
+def get_gemini_client():
+    """Configure Gemini using Streamlit secrets and return model."""
+    genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
     return genai.GenerativeModel(MODEL_NAME)
 
 
@@ -352,17 +352,12 @@ def main():
     left, right = st.columns([1, 1.3], gap="large")
 
     with left:
-        # st.markdown("#### ⚙️ Configuration")
-
-        # API key: prefer env var, allow manual entry as fallback
-        env_key = genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-        api_key = env_key
+        # Check if secret exists
         if "GEMINI_API_KEY" not in st.secrets:
-            st.error("API key not configured.")
-        else:
-            genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
-        if not env_key:
-            st.caption("🔑 Set `GEMINI_API_KEY` env variable to skip this step.")
+            st.error("❌ API key not configured. Please add it in Streamlit secrets.")
+            st.stop()
+        # if not env_key:
+        #     st.caption("🔑 Set `GEMINI_API_KEY` env variable to skip this step.")
 
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("#### 📝 Your Code")
@@ -402,7 +397,7 @@ def main():
         # ── Call Gemini ───────────────────────
         with st.spinner("🤖 Gemini is reviewing your code…"):
             try:
-                model   = get_gemini_client(api_key.strip())
+                model = get_gemini_client()
                 raw     = review_code(model, user_code.strip())
                 results = parse_response(raw)
             except Exception as exc:
