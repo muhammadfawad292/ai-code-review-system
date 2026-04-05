@@ -357,14 +357,10 @@ def main():
         # API key: prefer env var, allow manual entry as fallback
         env_key = genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
         api_key = env_key
-        if not env_key:
-            api_key = st.text_input(
-                "Gemini API Key",
-                value=env_key,
-                type="password",
-                placeholder="AIza...",
-                help="Get a free key at https://aistudio.google.com/app/apikey",
-        )
+        if "GEMINI_API_KEY" not in st.secrets:
+            st.error("API key not configured.")
+        else:
+            genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
         if not env_key:
             st.caption("🔑 Set `GEMINI_API_KEY` env variable to skip this step.")
 
