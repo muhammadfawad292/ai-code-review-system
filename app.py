@@ -387,9 +387,9 @@ def main():
             return
 
         # ── Validation ───────────────────────
-        if not api_key.strip():
-            st.error("❌ Please enter your Gemini API key.")
-            return
+        # if not api_key.strip():
+        #     st.error("❌ Please enter your Gemini API key.")
+        #     return
 
         if not user_code.strip():
             st.warning("⚠️  Code input is empty. Please paste some code to review.")
