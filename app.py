@@ -510,7 +510,7 @@ def main():
 
         # ── Convert Section ───────────────────────────────────
         st.markdown("#### 🔄 Convert Language")
-        st.caption("Gemini auto-detects your source language. Choose the target below.")
+        st.caption("CodeAudit auto-detects your source language. Choose the target below.")
 
         target_lang = st.selectbox(
             label="CONVERT TO",
