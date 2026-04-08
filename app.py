@@ -324,7 +324,7 @@ Return your response in EXACTLY this format (use these exact section headers):
 def get_model(api_key: str):
     """Configure and return a Gemini GenerativeModel."""
     genai.configure(api_key=api_key)
-    return genai.GenerativeModel("gemini-1.5-flash")
+    return genai.GenerativeModel("gemini-2.5-flash")
 
 
 def call_gemini(model, prompt: str) -> str:
