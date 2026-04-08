@@ -472,19 +472,19 @@ def main():
     # ════════════════════════════════════
     with left:
         # ── API Key ──────────────────────────────────────────
-        st.markdown("#### ⚙️ Configuration")
+        # st.markdown("#### ⚙️ Configuration")
 
         # ✅ CHANGED: read from st.secrets instead of os.environ
         secret_key = st.secrets.get("GEMINI_API_KEY", "")
-        api_key = st.text_input(
-            "Gemini API Key",
-            value=secret_key,
-            type="password",
-            placeholder="AIza...",
-            help="Get a free key at https://aistudio.google.com/app/apikey",
-        )
-        if not secret_key:
-            st.caption("🔑 Add `GEMINI_API_KEY` to your app's **Secrets** in the Streamlit Community Cloud dashboard.")
+        # api_key = st.text_input(
+        #     "Gemini API Key",
+        #     value=secret_key,
+        #     type="password",
+        #     placeholder="AIza...",
+        #     help="Get a free key at https://aistudio.google.com/app/apikey",
+        # )
+        # if not secret_key:
+        #     st.caption("🔑 Add `GEMINI_API_KEY` to your app's **Secrets** in the Streamlit Community Cloud dashboard.")
 
         st.markdown("<br>", unsafe_allow_html=True)
 
