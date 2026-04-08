@@ -537,10 +537,10 @@ def main():
             return
 
         # Shared validation
-        err = validate(api_key, user_code)
-        if err:
-            (st.warning if err.startswith("⚠") else st.error)(err)
-            return
+        # err = validate(api_key, user_code)
+        # if err:
+        #     (st.warning if err.startswith("⚠") else st.error)(err)
+        #     return
 
         # ────────────────────────────────
         #  REVIEW MODE
