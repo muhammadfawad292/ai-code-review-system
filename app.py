@@ -458,9 +458,9 @@ def main():
     # ── Hero ─────────────────────────────────────────────────
     st.markdown("""
     <div class="hero">
-            <div class="badge">Build by Muhammad Fawad</div>
+            <div class="badge">Made by Muhammad Fawad</div>
        <!-- <div class="badge">POWERED BY GEMINI 1.5 FLASH</div> -->
-        <h1>AI <span>Code Review</span> System</h1>
+        <h1>AI <span>Code Audit</span> System</h1>
         <p>Review bugs · Fix code · Convert between languages — instantly.</p>
     </div>
     """, unsafe_allow_html=True)
