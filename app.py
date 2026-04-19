@@ -66,32 +66,49 @@ h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 800; }
 /* ── Hero ── */
 .hero {
     text-align: center;
-    padding: 2.5rem 1rem 1.5rem;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2rem;
+    padding: 3rem 1rem 2rem;
+    margin-bottom: 2.5rem;
 }
 .hero .badge {
     display: inline-block;
-    background: #00e5a020;
-    border: 1px solid var(--green);
+    background: #00e5a015;
+    border: 1px solid #00e5a050;
     color: var(--green);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
-    padding: 4px 14px;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    padding: 3px 12px;
     border-radius: 20px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.1rem;
+    text-transform: uppercase;
 }
 .hero h1 {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    color: #fff;
-    margin: 0 0 0.4rem;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--green);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.01em;
+    font-weight: 800;
 }
-.hero h1 span { color: var(--green); }
-.hero p { color: var(--muted); font-size: 1.05rem; margin: 0; }
+.hero h1 .icon { color: #fff; margin-left: 0.3rem; font-size: 0.85em; }
+.hero p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+.hero p span { margin: 0 0.4rem; opacity: 0.4; }
 
-/* ── Section divider label ── */
+/* ── Two-column wrapper ── */
+.main-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+}
+
+/* ── Section label ── */
 .section-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.68rem;
@@ -108,6 +125,17 @@ h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 800; }
     flex: 1;
     height: 1px;
     background: var(--border);
+}
+
+/* ── Left panel heading ── */
+.panel-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 /* ── Cards ── */
@@ -167,21 +195,22 @@ textarea:focus {
 }
 [data-testid="stTextArea"] label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.78rem;
-    letter-spacing: 0.1em;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
     color: var(--muted) !important;
+    text-transform: uppercase;
 }
 
-/* ── Buttons — both green ── */
+/* ── Buttons ── */
 .stButton > button {
     background: var(--green) !important;
     color: #0d0f14 !important;
     font-family: 'Syne', sans-serif !important;
     font-weight: 700 !important;
-    font-size: 0.95rem !important;
+    font-size: 0.9rem !important;
     border: none !important;
     border-radius: 8px !important;
-    padding: 0.65rem 2.2rem !important;
+    padding: 0.6rem 2rem !important;
     letter-spacing: 0.04em !important;
     transition: opacity 0.15s ease, transform 0.1s ease !important;
     width: 100%;
@@ -191,8 +220,24 @@ textarea:focus {
 
 /* ── Convert button — purple accent ── */
 .convert-btn .stButton > button {
-    background: var(--purple) !important;
-    color: #fff !important;
+    background: var(--green) !important;
+    color: #0d0f14 !important;
+}
+
+/* ── Divider ── */
+.panel-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1.5rem 0;
+}
+
+/* ── Convert section sub-caption ── */
+.convert-caption {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin: -0.4rem 0 1rem;
+    letter-spacing: 0.02em;
 }
 
 /* ── Selectbox ── */
@@ -206,9 +251,10 @@ textarea:focus {
 }
 [data-testid="stSelectbox"] label {
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.78rem !important;
-    letter-spacing: 0.1em !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.14em !important;
     color: var(--muted) !important;
+    text-transform: uppercase !important;
 }
 
 /* ── Text input (API key) ── */
@@ -221,10 +267,42 @@ textarea:focus {
     font-size: 0.82rem !important;
 }
 
+/* ── Results panel heading ── */
+.results-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ── Info box ── */
+.info-box {
+    background: #131926;
+    border: 1px solid #1f2d45;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.88rem;
+    color: var(--text);
+}
+.info-box .icon { font-size: 1rem; margin-top: 0.05rem; }
+.info-box strong { color: #fff; }
+
 /* ── Misc ── */
 .stAlert { border-radius: 8px !important; border-left-width: 3px !important; }
 [data-testid="stSpinner"] p { color: var(--green) !important; }
 hr { border-color: var(--border) !important; }
+
+/* Tighten Streamlit column gaps to match layout */
+[data-testid="stHorizontalBlock"] {
+    gap: 2rem !important;
+    align-items: flex-start !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -233,7 +311,6 @@ hr { border-color: var(--border) !important; }
 #  LANGUAGE MAPPINGS
 # ─────────────────────────────────────────────
 
-# Display name → Streamlit st.code language identifier
 LANG_MAP: dict = {
     "Python":     "python",
     "JavaScript": "javascript",
@@ -255,7 +332,6 @@ LANG_MAP: dict = {
     "R":          "r",
 }
 
-# Lower-case alias → canonical display name (normalises Gemini's free-form output)
 LANG_ALIAS: dict = {
     "python": "Python", "javascript": "JavaScript", "js": "JavaScript",
     "typescript": "TypeScript", "ts": "TypeScript", "java": "Java",
@@ -266,7 +342,7 @@ LANG_ALIAS: dict = {
     "dart": "Dart", "scala": "Scala", "r": "R",
 }
 
-CONVERT_TARGETS = list(LANG_MAP.keys())   # dropdown options
+CONVERT_TARGETS = list(LANG_MAP.keys())
 
 
 # ─────────────────────────────────────────────
@@ -322,18 +398,15 @@ Return your response in EXACTLY this format (use these exact section headers):
 #  GEMINI HELPERS
 # ─────────────────────────────────────────────
 def get_model(api_key: str):
-    """Configure and return a Gemini GenerativeModel."""
     genai.configure(api_key=api_key)
     return genai.GenerativeModel("gemini-2.5-flash")
 
 
 def call_gemini(model, prompt: str) -> str:
-    """Send a prompt to Gemini and return the text response."""
     return model.generate_content(prompt).text
 
 
 def detect_language(model, code: str) -> str:
-    """Ask Gemini to identify the language — returns canonical display name."""
     raw = call_gemini(
         model,
         f"What programming language is this code written in? "
@@ -346,7 +419,6 @@ def detect_language(model, code: str) -> str:
 #  PARSERS
 # ─────────────────────────────────────────────
 def _extract_code_block(raw: str, header: str, next_header: str = "") -> str:
-    """Pull a fenced code block that follows a given ## HEADER."""
     pattern = rf"##\s*{re.escape(header)}\s*```(?:\w+)?\n?(.*?)```"
     m = re.search(pattern, raw, re.DOTALL | re.IGNORECASE)
     if m:
@@ -362,7 +434,6 @@ def _extract_code_block(raw: str, header: str, next_header: str = "") -> str:
 
 
 def _extract_section(raw: str, header: str, next_header: str = "") -> str:
-    """Extract prose section following a ## HEADER."""
     end = rf"(?:##\s*{re.escape(next_header)}|$)" if next_header else r"$"
     m = re.search(
         rf"##\s*{re.escape(header)}\s*(.*?){end}",
@@ -404,7 +475,6 @@ def render_card(color: str, icon: str, title: str, content: str, is_code: bool =
 
 
 def md_to_html(text: str) -> str:
-    """Convert markdown-style bullet lines to HTML."""
     lines = text.split("\n")
     out, in_list = [], False
     for line in lines:
@@ -458,45 +528,31 @@ def main():
     # ── Hero ─────────────────────────────────────────────────
     st.markdown("""
     <div class="hero">
-            <div class="badge">Made by Muhammad Fawad</div>
-       <!-- <div class="badge">POWERED BY GEMINI 1.5 FLASH</div> -->
-        <h1>AI <span>Code Audit</span> System</h1>
-        <p>Review bugs · Fix code · Convert between languages — instantly.</p>
+        <div class="badge">Made by Muhammad Fawad</div>
+        <h1>AI Code Audit System <span class="icon">∞</span></h1>
+        <p>Review bugs <span>·</span> Fix code <span>·</span> Convert between languages — instantly.</p>
     </div>
     """, unsafe_allow_html=True)
 
-    left, right = st.columns([1, 1.3], gap="large")
+    # ── Two-column layout: narrow left, wide right ────────────
+    left, right = st.columns([1, 1.6], gap="large")
 
     # ════════════════════════════════════
     #  LEFT PANEL
     # ════════════════════════════════════
     with left:
-        # ── API Key ──────────────────────────────────────────
-        # st.markdown("#### ⚙️ Configuration")
-
-        # ✅ CHANGED: read from st.secrets instead of os.environ
         api_key = st.secrets.get("GEMINI_API_KEY", "")
-        # api_key = st.text_input(
-        #     "Gemini API Key",
-        #     value=api_key,
-        #     type="password",
-        #     placeholder="AIza...",
-        #     help="Get a free key at https://aistudio.google.com/app/apikey",
-        # )
-        # if not api_key:
-        #     st.caption("🔑 Add `GEMINI_API_KEY` to your app's **Secrets** in the Streamlit Community Cloud dashboard.")
 
-        st.markdown("<br>", unsafe_allow_html=True)
+        # ── Your Code heading ──
+        st.markdown('<div class="panel-heading">📝 Your Code</div>', unsafe_allow_html=True)
 
-        # ── Code Input ───────────────────────────────────────
-        st.markdown("#### 📝 Your Code")
         user_code = st.text_area(
             label="PASTE CODE BELOW",
             placeholder=(
                 "# Paste any code here — Python, JS, Java, C++, SQL, etc.\n\n"
                 "def greet(name):\n    print('Hello, ' + name)\n\ngreet()"
             ),
-            height=300,
+            height=280,
             key="code_input",
         )
 
@@ -506,11 +562,14 @@ def main():
         review_clicked = st.button("🔍  Review Code", use_container_width=True, key="btn_review")
 
         # ── Divider ──────────────────────────────────────────
-        st.markdown("---")
+        st.markdown('<hr class="panel-divider">', unsafe_allow_html=True)
 
         # ── Convert Section ───────────────────────────────────
-        st.markdown("#### 🔄 Convert Language")
-        st.caption("CodeAudit auto-detects your source language. Choose the target below.")
+        st.markdown('<div class="panel-heading">🔄 Convert Language</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<p class="convert-caption">CodeAudit auto-detects your source language. Choose the target below.</p>',
+            unsafe_allow_html=True
+        )
 
         target_lang = st.selectbox(
             label="CONVERT TO",
@@ -520,7 +579,6 @@ def main():
             help="Pick the language you want your code translated into.",
         )
 
-        # Purple-accented Convert button via a wrapper div
         st.markdown('<div class="convert-btn">', unsafe_allow_html=True)
         convert_clicked = st.button("⚡  Convert Code", use_container_width=True, key="btn_convert")
         st.markdown('</div>', unsafe_allow_html=True)
@@ -530,23 +588,21 @@ def main():
     # ════════════════════════════════════
     with right:
 
-        # Nothing clicked yet
         if not review_clicked and not convert_clicked:
-            st.markdown("#### 📊 Results")
-            st.info("👈  Paste your code on the left, then click **Review Code** or **Convert Code**.")
+            st.markdown('<div class="results-heading">📊 Results</div>', unsafe_allow_html=True)
+            st.markdown("""
+            <div class="info-box">
+                <span class="icon">👉</span>
+                <span>Paste your code on the left, then click <strong>Review Code</strong> or <strong>Convert Code</strong>.</span>
+            </div>
+            """, unsafe_allow_html=True)
             return
-
-        # Shared validation
-        # err = validate(api_key, user_code)
-        # if err:
-        #     (st.warning if err.startswith("⚠") else st.error)(err)
-        #     return
 
         # ────────────────────────────────
         #  REVIEW MODE
         # ────────────────────────────────
         if review_clicked:
-            st.markdown("#### 📊 Review Results")
+            st.markdown('<div class="results-heading">📊 Review Results</div>', unsafe_allow_html=True)
 
             with st.spinner("🤖 CodeAudit is reviewing your code…"):
                 try:
@@ -577,9 +633,8 @@ def main():
         #  CONVERT MODE
         # ────────────────────────────────
         elif convert_clicked:
-            st.markdown("#### 📊 Conversion Results")
+            st.markdown('<div class="results-heading">📊 Conversion Results</div>', unsafe_allow_html=True)
 
-            # Step 1: detect source language
             with st.spinner("🔎 Detecting source language…"):
                 try:
                     model       = get_model(api_key.strip())
@@ -588,7 +643,6 @@ def main():
                     show_api_error(exc)
                     return
 
-            # Guard: same language
             if source_lang.lower() == target_lang.lower():
                 st.warning(
                     f"⚠️ Source is already **{source_lang}**. "
@@ -596,7 +650,6 @@ def main():
                 )
                 return
 
-            # Step 2: convert
             st.markdown(
                 f'<div class="section-label">Converting {source_lang} → {target_lang}</div>',
                 unsafe_allow_html=True,
@@ -619,18 +672,15 @@ def main():
 
             st_lang = to_st_lang(target_lang)
 
-            # ── Converted Code card (purple) ──────────────
             render_card("purple", "⚡", f"Converted Code ({target_lang})",
                         conv["converted_code"], is_code=True)
             st.code(conv["converted_code"], language=st_lang)
             st.caption("☝️ Use the copy icon above to copy the converted code.")
 
-            # ── Conversion Notes card (amber) ─────────────
             render_card("amber", "🧠",
                         f"Conversion Notes  ({source_lang} → {target_lang})",
                         md_to_html(conv["conversion_notes"]))
 
-            # ── Best Practices card (blue) ────────────────
             render_card("blue", "💡",
                         f"Best Practices ({target_lang})",
                         md_to_html(conv["best_practices"]))
