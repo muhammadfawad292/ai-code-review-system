@@ -9,7 +9,6 @@ INSTALLATION:
 HOW TO RUN:
     Option 1 — Local:
         streamlit run app.py
-        (enter your API key in the sidebar input)
 
     Option 2 — Streamlit Community Cloud:
         Add your key to the app Secrets dashboard:
@@ -34,40 +33,49 @@ st.set_page_config(
 )
 
 # ─────────────────────────────────────────────
-#  CUSTOM CSS — dark terminal aesthetic
+#  CUSTOM CSS
 # ─────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;800&display=swap');
 
 :root {
-    --bg:       #0d0f14;
-    --surface:  #13161e;
-    --border:   #1f2433;
-    --green:    #00e5a0;
-    --amber:    #ffb938;
-    --blue:     #4da6ff;
-    --purple:   #b066ff;
-    --red:      #ff5f6d;
-    --muted:    #5a6380;
-    --text:     #d4daf0;
+    --bg:      #0d0f14;
+    --surface: #13161e;
+    --border:  #1f2433;
+    --green:   #00e5a0;
+    --amber:   #ffb938;
+    --blue:    #4da6ff;
+    --purple:  #b066ff;
+    --muted:   #5a6380;
+    --text:    #d4daf0;
 }
 
+/* ── Base ── */
 html, body, [data-testid="stAppViewContainer"] {
     background: var(--bg) !important;
     color: var(--text);
     font-family: 'Syne', sans-serif;
 }
-[data-testid="stHeader"] { background: transparent !important; }
+[data-testid="stHeader"]  { background: transparent !important; }
 [data-testid="stSidebar"] { background: var(--surface) !important; }
 #MainMenu, footer, header { visibility: hidden; }
 h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 800; }
 
+/* ── Tighten Streamlit container so everything fits without scrolling ── */
+.block-container {
+    padding-top: 0.8rem !important;
+    padding-bottom: 0.5rem !important;
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+    max-width: 100% !important;
+}
+
 /* ── Hero ── */
 .hero {
     text-align: center;
-    padding: 3rem 1rem 2rem;
-    margin-bottom: 2.5rem;
+    padding: 1.2rem 1rem 1rem;
+    margin-bottom: 1.2rem;
 }
 .hero .badge {
     display: inline-block;
@@ -75,119 +83,56 @@ h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 800; }
     border: 1px solid #00e5a050;
     color: var(--green);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    padding: 3px 12px;
+    font-size: 0.64rem;
+    letter-spacing: 0.2em;
+    padding: 3px 14px;
     border-radius: 20px;
-    margin-bottom: 1.1rem;
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
 }
 .hero h1 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-size: clamp(1.5rem, 3vw, 2.3rem);
     color: var(--green);
-    margin: 0 0 0.5rem;
+    margin: 0 0 0.4rem;
     letter-spacing: -0.01em;
     font-weight: 800;
 }
-.hero h1 .icon { color: #fff; margin-left: 0.3rem; font-size: 0.85em; }
+.hero h1 .icon { color: #fff; margin-left: 0.35rem; font-size: 0.82em; }
 .hero p {
     color: var(--muted);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     margin: 0;
     letter-spacing: 0.02em;
 }
-.hero p span { margin: 0 0.4rem; opacity: 0.4; }
+.hero p span { margin: 0 0.5rem; opacity: 0.35; }
 
-/* ── Two-column wrapper ── */
-.main-layout {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 2rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 1.5rem 3rem;
+/* ── Column alignment — top-align both panels ── */
+[data-testid="stHorizontalBlock"] {
+    gap: 2.5rem !important;
+    align-items: flex-start !important;
 }
 
-/* ── Section label ── */
-.section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin: 1.4rem 0 0.8rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-.section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-}
-
-/* ── Left panel heading ── */
+/* ── Panel headings ── */
 .panel-heading {
-    font-size: 1rem;
+    font-size: 0.96rem;
     font-weight: 700;
     color: var(--text);
-    margin: 0 0 0.9rem;
+    margin: 0 0 0.65rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
 }
-
-/* ── Cards ── */
-.card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.4rem 1.6rem;
-    margin-bottom: 1.2rem;
-}
-.card-header {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    margin-bottom: 1rem;
-    padding-bottom: 0.7rem;
-    border-bottom: 1px solid var(--border);
-}
-.card.green  .card-header { color: var(--green);  border-color: #00e5a030; }
-.card.amber  .card-header { color: var(--amber);  border-color: #ffb93830; }
-.card.blue   .card-header { color: var(--blue);   border-color: #4da6ff30; }
-.card.purple .card-header { color: var(--purple); border-color: #b066ff30; }
-
-.card pre {
-    background: #090b11 !important;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem 1.2rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.82rem;
-    overflow-x: auto;
-    color: #c9d1e8;
-    white-space: pre-wrap;
-    word-break: break-word;
-    margin: 0;
-}
-.card .prose { font-size: 0.93rem; line-height: 1.75; color: var(--text); }
-.card .prose ul { padding-left: 1.4rem; margin: 0.5rem 0; }
-.card .prose li { margin-bottom: 0.35rem; }
 
 /* ── Textarea ── */
 textarea {
     background: #090b11 !important;
     color: #c9d1e8 !important;
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.83rem !important;
+    font-size: 0.82rem !important;
     border: 1px solid var(--border) !important;
     border-radius: 10px !important;
     caret-color: var(--green) !important;
+    resize: none !important;
 }
 textarea:focus {
     border-color: var(--green) !important;
@@ -195,8 +140,8 @@ textarea:focus {
 }
 [data-testid="stTextArea"] label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.14em;
+    font-size: 0.67rem;
+    letter-spacing: 0.16em;
     color: var(--muted) !important;
     text-transform: uppercase;
 }
@@ -210,33 +155,32 @@ textarea:focus {
     font-size: 0.9rem !important;
     border: none !important;
     border-radius: 8px !important;
-    padding: 0.6rem 2rem !important;
+    padding: 0.55rem 2rem !important;
     letter-spacing: 0.04em !important;
     transition: opacity 0.15s ease, transform 0.1s ease !important;
     width: 100%;
 }
-.stButton > button:hover { opacity: 0.85 !important; transform: translateY(-1px) !important; }
-.stButton > button:active { transform: translateY(0) !important; }
+.stButton > button:hover  { opacity: 0.85 !important; transform: translateY(-1px) !important; }
+.stButton > button:active { transform: translateY(0)  !important; }
 
-/* ── Convert button — purple accent ── */
 .convert-btn .stButton > button {
     background: var(--green) !important;
     color: #0d0f14 !important;
 }
 
-/* ── Divider ── */
+/* ── Thin horizontal divider ── */
 .panel-divider {
     border: none;
     border-top: 1px solid var(--border);
-    margin: 1.5rem 0;
+    margin: 0.85rem 0;
 }
 
-/* ── Convert section sub-caption ── */
+/* ── Convert section caption ── */
 .convert-caption {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
+    font-size: 0.69rem;
     color: var(--muted);
-    margin: -0.4rem 0 1rem;
+    margin: -0.25rem 0 0.7rem;
     letter-spacing: 0.02em;
 }
 
@@ -247,62 +191,116 @@ textarea:focus {
     border-radius: 8px !important;
     color: var(--text) !important;
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.83rem !important;
+    font-size: 0.82rem !important;
 }
 [data-testid="stSelectbox"] label {
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.72rem !important;
-    letter-spacing: 0.14em !important;
+    font-size: 0.67rem !important;
+    letter-spacing: 0.16em !important;
     color: var(--muted) !important;
     text-transform: uppercase !important;
 }
 
-/* ── Text input (API key) ── */
-[data-testid="stTextInput"] input {
-    background: #090b11 !important;
-    color: var(--text) !important;
-    border: 1px solid var(--border) !important;
-    border-radius: 8px !important;
-    font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.82rem !important;
+/* ── Results panel — offset to align with vertical middle of textarea ──
+   Left panel structure heights (approximate):
+     panel-heading: ~1.7rem
+     label:         ~1rem
+     textarea:      210px  → midpoint at ~105px from top of textarea
+                              so ~137px from top of left panel
+     The right panel starts at same top as left, so we add margin-top
+     to push .results-outer down to that midpoint.                      ── */
+.results-outer {
+    margin-top: 4.8rem;   /* ≈ heading + label row + half of textarea */
 }
-
-/* ── Results panel heading ── */
 .results-heading {
-    font-size: 1rem;
+    font-size: 0.96rem;
     font-weight: 700;
     color: var(--text);
-    margin: 0 0 1rem;
+    margin: 0 0 0.65rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
 }
 
-/* ── Info box ── */
+/* ── Info / placeholder box ── */
 .info-box {
     background: #131926;
-    border: 1px solid #1f2d45;
+    border: 1px solid #1e2d45;
     border-radius: 10px;
-    padding: 1rem 1.2rem;
+    padding: 1rem 1.3rem;
     display: flex;
     align-items: flex-start;
-    gap: 0.7rem;
+    gap: 0.75rem;
     font-size: 0.88rem;
     color: var(--text);
+    line-height: 1.5;
 }
-.info-box .icon { font-size: 1rem; margin-top: 0.05rem; }
+.info-box .icon { font-size: 1.05rem; margin-top: 0.05rem; flex-shrink: 0; }
 .info-box strong { color: #fff; }
+
+/* ── Result cards ── */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.4rem;
+    margin-bottom: 0.9rem;
+}
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+}
+.card.green  .card-header { color: var(--green);  border-color: #00e5a030; }
+.card.amber  .card-header { color: var(--amber);  border-color: #ffb93830; }
+.card.blue   .card-header { color: var(--blue);   border-color: #4da6ff30; }
+.card.purple .card-header { color: var(--purple); border-color: #b066ff30; }
+
+.card pre {
+    background: #090b11 !important;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 1.1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.79rem;
+    overflow-x: auto;
+    color: #c9d1e8;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+}
+.card .prose { font-size: 0.89rem; line-height: 1.75; color: var(--text); }
+.card .prose ul { padding-left: 1.3rem; margin: 0.4rem 0; }
+.card .prose li { margin-bottom: 0.3rem; }
+
+/* ── Section label (conversion direction) ── */
+.section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.64rem;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin: 0.9rem 0 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
 
 /* ── Misc ── */
 .stAlert { border-radius: 8px !important; border-left-width: 3px !important; }
 [data-testid="stSpinner"] p { color: var(--green) !important; }
-hr { border-color: var(--border) !important; }
-
-/* Tighten Streamlit column gaps to match layout */
-[data-testid="stHorizontalBlock"] {
-    gap: 2rem !important;
-    align-items: flex-start !important;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -310,7 +308,6 @@ hr { border-color: var(--border) !important; }
 # ─────────────────────────────────────────────
 #  LANGUAGE MAPPINGS
 # ─────────────────────────────────────────────
-
 LANG_MAP: dict = {
     "Python":     "python",
     "JavaScript": "javascript",
@@ -511,21 +508,11 @@ def show_api_error(exc: Exception):
         st.error(f"❌ An error occurred:\n\n```\n{msg}\n```")
 
 
-def validate(api_key: str, code: str) -> str | None:
-    if not api_key.strip():
-        return "❌ Please enter your Gemini API key."
-    if not code.strip():
-        return "⚠️ Code input is empty. Please paste some code."
-    if len(code.strip()) < 5:
-        return "⚠️ Code is too short. Please paste a meaningful snippet."
-    return None
-
-
 # ─────────────────────────────────────────────
 #  MAIN APP
 # ─────────────────────────────────────────────
 def main():
-    # ── Hero ─────────────────────────────────────────────────
+    # ── Hero ────────────────────────────────────────────────
     st.markdown("""
     <div class="hero">
         <div class="badge">Made by Muhammad Fawad</div>
@@ -534,16 +521,16 @@ def main():
     </div>
     """, unsafe_allow_html=True)
 
-    # ── Two-column layout: narrow left, wide right ────────────
-    left, right = st.columns([1, 1.6], gap="large")
+    # ── Two-column layout ───────────────────────────────────
+    left, right = st.columns([1, 1.35], gap="large")
 
-    # ════════════════════════════════════
+    # ════════════════════════════════
     #  LEFT PANEL
-    # ════════════════════════════════════
+    # ════════════════════════════════
     with left:
         api_key = st.secrets.get("GEMINI_API_KEY", "")
 
-        # ── Your Code heading ──
+        # ── Your Code ──
         st.markdown('<div class="panel-heading">📝 Your Code</div>', unsafe_allow_html=True)
 
         user_code = st.text_area(
@@ -552,23 +539,21 @@ def main():
                 "# Paste any code here — Python, JS, Java, C++, SQL, etc.\n\n"
                 "def greet(name):\n    print('Hello, ' + name)\n\ngreet()"
             ),
-            height=280,
+            height=210,          # compact: keeps Convert visible below
             key="code_input",
         )
 
-        st.markdown("<br>", unsafe_allow_html=True)
-
-        # ── Review Button ─────────────────────────────────────
+        # ── Review button ──
         review_clicked = st.button("🔍  Review Code", use_container_width=True, key="btn_review")
 
-        # ── Divider ──────────────────────────────────────────
+        # ── Thin divider ──
         st.markdown('<hr class="panel-divider">', unsafe_allow_html=True)
 
-        # ── Convert Section ───────────────────────────────────
+        # ── Convert Language ──
         st.markdown('<div class="panel-heading">🔄 Convert Language</div>', unsafe_allow_html=True)
         st.markdown(
             '<p class="convert-caption">CodeAudit auto-detects your source language. Choose the target below.</p>',
-            unsafe_allow_html=True
+            unsafe_allow_html=True,
         )
 
         target_lang = st.selectbox(
@@ -576,34 +561,39 @@ def main():
             options=CONVERT_TARGETS,
             index=0,
             key="target_lang",
-            help="Pick the language you want your code translated into.",
         )
 
         st.markdown('<div class="convert-btn">', unsafe_allow_html=True)
         convert_clicked = st.button("⚡  Convert Code", use_container_width=True, key="btn_convert")
         st.markdown('</div>', unsafe_allow_html=True)
 
-    # ════════════════════════════════════
+    # ════════════════════════════════
     #  RIGHT PANEL
-    # ════════════════════════════════════
+    # ════════════════════════════════
     with right:
+        # Offset the results block so it sits vertically aligned with
+        # the middle of the code textarea on the left.
+        # Left panel heights above textarea midpoint:
+        #   heading ~1.7rem + label ~1rem + half textarea (210px≈13.1rem)/2 ≈ 8.3rem
+        #   Streamlit adds ~0.5rem gap between elements  → total ≈ 4.8rem offset
+        st.markdown('<div class="results-outer">', unsafe_allow_html=True)
+        st.markdown('<div class="results-heading">📊 Results</div>', unsafe_allow_html=True)
 
         if not review_clicked and not convert_clicked:
-            st.markdown('<div class="results-heading">📊 Results</div>', unsafe_allow_html=True)
             st.markdown("""
             <div class="info-box">
                 <span class="icon">👉</span>
-                <span>Paste your code on the left, then click <strong>Review Code</strong> or <strong>Convert Code</strong>.</span>
+                <span>Paste your code on the left, then click
+                      <strong>Review Code</strong> or <strong>Convert Code</strong>.</span>
             </div>
             """, unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
             return
 
-        # ────────────────────────────────
-        #  REVIEW MODE
-        # ────────────────────────────────
-        if review_clicked:
-            st.markdown('<div class="results-heading">📊 Review Results</div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
 
+        # ── REVIEW MODE ──────────────────────────────────────
+        if review_clicked:
             with st.spinner("🤖 CodeAudit is reviewing your code…"):
                 try:
                     model   = get_model(api_key.strip())
@@ -620,21 +610,14 @@ def main():
                         results["corrected_code"], is_code=True)
             st.code(results["corrected_code"], language=st_lang)
             st.caption("☝️ Use the copy icon above to copy the corrected code.")
-
             render_card("amber", "🧠", "Bug Explanation",
                         md_to_html(results["bug_explanation"]))
-
             render_card("blue", "💡", "Suggestions & Best Practices",
                         md_to_html(results["suggestions"]))
-
             st.success("✅ Review complete!")
 
-        # ────────────────────────────────
-        #  CONVERT MODE
-        # ────────────────────────────────
+        # ── CONVERT MODE ─────────────────────────────────────
         elif convert_clicked:
-            st.markdown('<div class="results-heading">📊 Conversion Results</div>', unsafe_allow_html=True)
-
             with st.spinner("🔎 Detecting source language…"):
                 try:
                     model       = get_model(api_key.strip())
@@ -646,7 +629,7 @@ def main():
             if source_lang.lower() == target_lang.lower():
                 st.warning(
                     f"⚠️ Source is already **{source_lang}**. "
-                    f"Please choose a different target language."
+                    "Please choose a different target language."
                 )
                 return
 
@@ -676,15 +659,12 @@ def main():
                         conv["converted_code"], is_code=True)
             st.code(conv["converted_code"], language=st_lang)
             st.caption("☝️ Use the copy icon above to copy the converted code.")
-
             render_card("amber", "🧠",
                         f"Conversion Notes  ({source_lang} → {target_lang})",
                         md_to_html(conv["conversion_notes"]))
-
             render_card("blue", "💡",
                         f"Best Practices ({target_lang})",
                         md_to_html(conv["best_practices"]))
-
             st.success(f"✅ Conversion complete — {source_lang} → {target_lang}!")
 
 
