@@ -229,9 +229,12 @@ textarea:focus {
 
 /* ── Results panel vertical alignment ── */
 .results-outer {
-    /* Align "Results" heading with the top of the textarea.
-       Left panel above textarea: heading(~1.3rem) + label(~0.9rem) = ~2.2rem */
-    margin-top: 2.2rem;
+    /* Align Results box with the vertical MIDDLE of the textarea.
+       Left panel: hero bottom-margin(0.8rem) + heading(1.2rem) + label(0.85rem)
+       + half textarea(155px ≈ 9.7rem / 2 = 4.85rem) ≈ 7.7rem total from top.
+       Right panel starts at same origin, so push down by that amount
+       minus the results-heading height (~1.1rem) = ~6.6rem               */
+    margin-top: 6.6rem;
 }
 .results-heading {
     font-size: 0.9rem;
@@ -600,7 +603,7 @@ def main():
         if not review_clicked and not convert_clicked:
             st.markdown("""
             <div class="info-box">
-                <span class="icon"></span>
+                <span class="icon">👉</span>
                 <span>Paste your code on the left, then click
                       <strong>Review Code</strong> or <strong>Convert Code</strong>.</span>
             </div>
