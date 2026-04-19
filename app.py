@@ -7,15 +7,10 @@ INSTALLATION:
     pip install streamlit google-generativeai
 
 HOW TO RUN:
-    Option 1 — Local:
-        streamlit run app.py
+    streamlit run app.py
 
-    Option 2 — Streamlit Community Cloud:
-        Add your key to the app Secrets dashboard:
-            GEMINI_API_KEY = "your_api_key_here"
-
-GET YOUR FREE GEMINI API KEY:
-    https://aistudio.google.com/app/apikey
+ADD YOUR KEY to Streamlit Secrets:
+    GEMINI_API_KEY = "your_api_key_here"
 """
 
 import re
@@ -56,26 +51,40 @@ html, body, [data-testid="stAppViewContainer"] {
     background: var(--bg) !important;
     color: var(--text);
     font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
 }
-[data-testid="stHeader"]  { background: transparent !important; }
+[data-testid="stHeader"]  { background: transparent !important; height: 0 !important; }
 [data-testid="stSidebar"] { background: var(--surface) !important; }
 #MainMenu, footer, header { visibility: hidden; }
 h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 800; }
 
-/* ── Tighten Streamlit container so everything fits without scrolling ── */
+/* ── Strip ALL Streamlit default padding/margin ── */
 .block-container {
-    padding-top: 0.8rem !important;
-    padding-bottom: 0.5rem !important;
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0 !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
     max-width: 100% !important;
 }
 
-/* ── Hero ── */
+/* Kill extra spacing Streamlit injects between elements */
+div[data-testid="stVerticalBlock"] > div {
+    gap: 0 !important;
+}
+div[data-testid="stVerticalBlockSeparator"] {
+    display: none !important;
+}
+/* Shrink default margin on all stMarkdown blocks */
+[data-testid="stMarkdownContainer"] > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+/* ── Hero — ultra-compact ── */
 .hero {
     text-align: center;
-    padding: 1.2rem 1rem 1rem;
-    margin-bottom: 1.2rem;
+    padding: 0.6rem 1rem 0.7rem;
+    margin-bottom: 0.8rem;
 }
 .hero .badge {
     display: inline-block;
@@ -83,52 +92,53 @@ h1, h2, h3 { font-family: 'Syne', sans-serif; font-weight: 800; }
     border: 1px solid #00e5a050;
     color: var(--green);
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.64rem;
+    font-size: 0.6rem;
     letter-spacing: 0.2em;
-    padding: 3px 14px;
+    padding: 2px 12px;
     border-radius: 20px;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.45rem;
     text-transform: uppercase;
 }
 .hero h1 {
-    font-size: clamp(1.5rem, 3vw, 2.3rem);
+    font-size: clamp(1.4rem, 2.8vw, 2.1rem);
     color: var(--green);
-    margin: 0 0 0.4rem;
+    margin: 0 0 0.3rem;
     letter-spacing: -0.01em;
     font-weight: 800;
+    line-height: 1.15;
 }
-.hero h1 .icon { color: #fff; margin-left: 0.35rem; font-size: 0.82em; }
+.hero h1 .icon { color: #fff; margin-left: 0.3rem; font-size: 0.8em; }
 .hero p {
     color: var(--muted);
-    font-size: 0.88rem;
+    font-size: 0.82rem;
     margin: 0;
     letter-spacing: 0.02em;
 }
-.hero p span { margin: 0 0.5rem; opacity: 0.35; }
+.hero p span { margin: 0 0.4rem; opacity: 0.35; }
 
-/* ── Column alignment — top-align both panels ── */
+/* ── Column gap ── */
 [data-testid="stHorizontalBlock"] {
-    gap: 2.5rem !important;
+    gap: 2rem !important;
     align-items: flex-start !important;
 }
 
 /* ── Panel headings ── */
 .panel-heading {
-    font-size: 0.96rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--text);
-    margin: 0 0 0.65rem;
+    margin: 0 0 0.3rem;
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.4rem;
 }
 
-/* ── Textarea ── */
+/* ── Textarea — key height reduction ── */
 textarea {
     background: #090b11 !important;
     color: #c9d1e8 !important;
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.82rem !important;
+    font-size: 0.8rem !important;
     border: 1px solid var(--border) !important;
     border-radius: 10px !important;
     caret-color: var(--green) !important;
@@ -138,24 +148,32 @@ textarea:focus {
     border-color: var(--green) !important;
     box-shadow: 0 0 0 3px #00e5a015 !important;
 }
+[data-testid="stTextArea"] {
+    margin-bottom: 0.4rem !important;
+}
 [data-testid="stTextArea"] label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.67rem;
-    letter-spacing: 0.16em;
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
     color: var(--muted) !important;
     text-transform: uppercase;
+    margin-bottom: 0.25rem !important;
 }
 
-/* ── Buttons ── */
+/* ── Buttons — slim ── */
+[data-testid="stButton"] {
+    margin-top: 0.35rem !important;
+    margin-bottom: 0 !important;
+}
 .stButton > button {
     background: var(--green) !important;
     color: #0d0f14 !important;
     font-family: 'Syne', sans-serif !important;
     font-weight: 700 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.88rem !important;
     border: none !important;
     border-radius: 8px !important;
-    padding: 0.55rem 2rem !important;
+    padding: 0.45rem 2rem !important;
     letter-spacing: 0.04em !important;
     transition: opacity 0.15s ease, transform 0.1s ease !important;
     width: 100%;
@@ -172,54 +190,57 @@ textarea:focus {
 .panel-divider {
     border: none;
     border-top: 1px solid var(--border);
-    margin: 0.85rem 0;
+    margin: 0.5rem 0 0.5rem;
 }
 
 /* ── Convert section caption ── */
 .convert-caption {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.69rem;
+    font-size: 0.65rem;
     color: var(--muted);
-    margin: -0.25rem 0 0.7rem;
+    margin: 0.1rem 0 0.35rem;
     letter-spacing: 0.02em;
+    line-height: 1.4;
 }
 
-/* ── Selectbox ── */
+/* ── Selectbox — compact ── */
+[data-testid="stSelectbox"] {
+    margin-bottom: 0.35rem !important;
+}
 [data-testid="stSelectbox"] > div > div {
     background: #090b11 !important;
     border: 1px solid var(--border) !important;
     border-radius: 8px !important;
     color: var(--text) !important;
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.82rem !important;
+    font-size: 0.8rem !important;
+    min-height: 2rem !important;
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
 }
 [data-testid="stSelectbox"] label {
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 0.67rem !important;
-    letter-spacing: 0.16em !important;
+    font-size: 0.62rem !important;
+    letter-spacing: 0.15em !important;
     color: var(--muted) !important;
     text-transform: uppercase !important;
+    margin-bottom: 0.2rem !important;
 }
 
-/* ── Results panel — offset to align with vertical middle of textarea ──
-   Left panel structure heights (approximate):
-     panel-heading: ~1.7rem
-     label:         ~1rem
-     textarea:      210px  → midpoint at ~105px from top of textarea
-                              so ~137px from top of left panel
-     The right panel starts at same top as left, so we add margin-top
-     to push .results-outer down to that midpoint.                      ── */
+/* ── Results panel vertical alignment ── */
 .results-outer {
-    margin-top: 4.8rem;   /* ≈ heading + label row + half of textarea */
+    /* Align "Results" heading with the top of the textarea.
+       Left panel above textarea: heading(~1.3rem) + label(~0.9rem) = ~2.2rem */
+    margin-top: 2.2rem;
 }
 .results-heading {
-    font-size: 0.96rem;
+    font-size: 0.9rem;
     font-weight: 700;
     color: var(--text);
-    margin: 0 0 0.65rem;
+    margin: 0 0 0.5rem;
     display: flex;
     align-items: center;
-    gap: 0.45rem;
+    gap: 0.4rem;
 }
 
 /* ── Info / placeholder box ── */
@@ -227,15 +248,15 @@ textarea:focus {
     background: #131926;
     border: 1px solid #1e2d45;
     border-radius: 10px;
-    padding: 1rem 1.3rem;
+    padding: 0.85rem 1.2rem;
     display: flex;
     align-items: flex-start;
-    gap: 0.75rem;
-    font-size: 0.88rem;
+    gap: 0.7rem;
+    font-size: 0.86rem;
     color: var(--text);
     line-height: 1.5;
 }
-.info-box .icon { font-size: 1.05rem; margin-top: 0.05rem; flex-shrink: 0; }
+.info-box .icon { font-size: 1rem; margin-top: 0.05rem; flex-shrink: 0; }
 .info-box strong { color: #fff; }
 
 /* ── Result cards ── */
@@ -243,18 +264,18 @@ textarea:focus {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 1.1rem 1.4rem;
-    margin-bottom: 0.9rem;
+    padding: 1rem 1.3rem;
+    margin-bottom: 0.8rem;
 }
 .card-header {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    font-size: 0.9rem;
+    gap: 0.5rem;
+    font-size: 0.88rem;
     font-weight: 700;
     letter-spacing: 0.04em;
-    margin-bottom: 0.8rem;
-    padding-bottom: 0.6rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.55rem;
     border-bottom: 1px solid var(--border);
 }
 .card.green  .card-header { color: var(--green);  border-color: #00e5a030; }
@@ -266,27 +287,27 @@ textarea:focus {
     background: #090b11 !important;
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 0.85rem 1.1rem;
+    padding: 0.8rem 1rem;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.79rem;
+    font-size: 0.78rem;
     overflow-x: auto;
     color: #c9d1e8;
     white-space: pre-wrap;
     word-break: break-word;
     margin: 0;
 }
-.card .prose { font-size: 0.89rem; line-height: 1.75; color: var(--text); }
-.card .prose ul { padding-left: 1.3rem; margin: 0.4rem 0; }
-.card .prose li { margin-bottom: 0.3rem; }
+.card .prose { font-size: 0.88rem; line-height: 1.7; color: var(--text); }
+.card .prose ul { padding-left: 1.2rem; margin: 0.35rem 0; }
+.card .prose li { margin-bottom: 0.28rem; }
 
-/* ── Section label (conversion direction) ── */
+/* ── Section label ── */
 .section-label {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.64rem;
+    font-size: 0.62rem;
     letter-spacing: 0.18em;
     color: var(--muted);
     text-transform: uppercase;
-    margin: 0.9rem 0 0.65rem;
+    margin: 0.8rem 0 0.6rem;
     display: flex;
     align-items: center;
     gap: 0.6rem;
@@ -539,7 +560,7 @@ def main():
                 "# Paste any code here — Python, JS, Java, C++, SQL, etc.\n\n"
                 "def greet(name):\n    print('Hello, ' + name)\n\ngreet()"
             ),
-            height=210,          # compact: keeps Convert visible below
+            height=155,          # ← tight enough to keep Convert fully visible
             key="code_input",
         )
 
@@ -571,18 +592,15 @@ def main():
     #  RIGHT PANEL
     # ════════════════════════════════
     with right:
-        # Offset the results block so it sits vertically aligned with
-        # the middle of the code textarea on the left.
-        # Left panel heights above textarea midpoint:
-        #   heading ~1.7rem + label ~1rem + half textarea (210px≈13.1rem)/2 ≈ 8.3rem
-        #   Streamlit adds ~0.5rem gap between elements  → total ≈ 4.8rem offset
+        # Align Results heading with the top of the textarea.
+        # Above textarea on left: heading(~1.2rem) + label(~0.85rem) = ~2.05rem
         st.markdown('<div class="results-outer">', unsafe_allow_html=True)
         st.markdown('<div class="results-heading">📊 Results</div>', unsafe_allow_html=True)
 
         if not review_clicked and not convert_clicked:
             st.markdown("""
             <div class="info-box">
-                <span class="icon">👈</span>
+                <span class="icon">👉</span>
                 <span>Paste your code on the left, then click
                       <strong>Review Code</strong> or <strong>Convert Code</strong>.</span>
             </div>
