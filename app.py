@@ -561,7 +561,7 @@ def main():
             label="PASTE CODE BELOW",
             placeholder=(
                 "# Paste any code here — Python, JS, Java, C++, SQL, etc.\n\n"
-                "def greet(name):\n    print('Hello, ' + name)\n\ngreet()"
+                "def greet():\n    print('Hello')\n\ngreet()"
             ),
             height=155,          # ← tight enough to keep Convert fully visible
             key="code_input",
