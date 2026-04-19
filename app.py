@@ -603,7 +603,7 @@ def main():
         if not review_clicked and not convert_clicked:
             st.markdown("""
             <div class="info-box">
-                <span class="icon">👉</span>
+                <span class="icon"></span>
                 <span>Paste your code on the left, then click
                       <strong>Review Code</strong> or <strong>Convert Code</strong>.</span>
             </div>
